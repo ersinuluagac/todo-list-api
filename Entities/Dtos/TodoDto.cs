@@ -2,7 +2,7 @@
 
 namespace Entities.Dtos
 {
-    public class TodoDtoForCreate
+    public class TodoDto
     {
         [Required(ErrorMessage = "Title is required.")]
         public string? Title { get; set; }

@@ -17,17 +17,17 @@ namespace Repositories.Implementations
         }
 
         //  CRUD operations
-        public IEnumerable<T> FindAll(bool trackChanges)
+        public IQueryable<T> FindAll(bool trackChanges)
         {
             return trackChanges
                 ? _context.Set<T>()
                 : _context.Set<T>().AsNoTracking();
         }
-        public T FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
         {
             return trackChanges
-                ? _context.Set<T>().Where(expression).SingleOrDefault()
-                : _context.Set<T>().Where(expression).AsNoTracking().SingleOrDefault();
+                ? _context.Set<T>().Where(expression)
+                : _context.Set<T>().Where(expression).AsNoTracking();
         }
         public void Create(T entity)
         {

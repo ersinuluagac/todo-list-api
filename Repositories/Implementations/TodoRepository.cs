@@ -7,33 +7,35 @@ namespace Repositories.Implementations
 {
     public class TodoRepository : BaseRepository<Todo>, ITodoRepository
     {
+        // Constructor
         public TodoRepository(RepositoryContext context) : base(context)
         {
             // The context is passed to the BaseRepository constructor.
         }
 
-        // CRUD operations for Todo items
+        // CRUD operations for Todo entity
         public async Task<IEnumerable<Todo>> FindAllTodosAsync(bool trackChanges)
         {
             return await FindAll(trackChanges)
                 .OrderBy(t => t.Id)
                 .ToListAsync();
         }
-        public Task<Todo> FindTodoByIdAsync(int id, bool trackChanges)
+        public async Task<Todo?> FindTodoByIdAsync(int id, bool trackChanges)
         {
-            throw new NotImplementedException();
+            return await FindByCondition(t => t.Id.Equals(id), trackChanges)
+                .SingleOrDefaultAsync();
         }
         public void CreateTodo(Todo todo)
         {
-            throw new NotImplementedException();
+            Create(todo);
         }
         public void UpdateTodo(Todo todo)
         {
-            throw new NotImplementedException();
+            Update(todo);
         }
-        public void DeleteTodo(int id)
+        public void DeleteTodo(Todo todo)
         {
-            throw new NotImplementedException();
+            Delete(todo);
         }
     }
 }

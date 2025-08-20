@@ -17,7 +17,7 @@ namespace Repositories.Contracts
         /// <param name="expression">Search condition.</param>
         /// <param name="trackChanges">Should the entity be tracked?</param>
         /// <returns>The matching entity.</returns>
-        T FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
+        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
 
         /// <summary>
         /// Add a new entity to the database.

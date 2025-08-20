@@ -2,14 +2,14 @@
 
 namespace Repositories.Contracts
 {
-    public interface ITodoRepository : IBaseRepository<Todo>
+    public interface ITodoRepository
     {
         /// <summary>
         /// Get all Todo items from database.
         /// </summary>
         /// <param name="trackChanges">Should entities be tracked?</param>
-        /// <returns>Queryable collection of entities.</returns>
-        Task<IQueryable<Todo>> FindAllTodosAsync(bool trackChanges);
+        /// <returns>Enumerable collection of entities.</returns>
+        Task<IEnumerable<Todo>> FindAllTodosAsync(bool trackChanges);
 
         /// <summary>
         /// Get a single Todo item from database that matches the condition.
@@ -17,7 +17,7 @@ namespace Repositories.Contracts
         /// <param name="id">The unique identifier of the Todo item.</param>
         /// <param name="trackChanges">Should the entity be tracked?</param>
         /// <returns>The matching Todo item.</returns>
-        Task<Todo> FindTodoByIdAsync(int id, bool trackChanges);
+        Task<Todo?> FindTodoByIdAsync(int id, bool trackChanges);
 
         /// <summary>
         /// Add a new Todo item to the database.
@@ -35,6 +35,6 @@ namespace Repositories.Contracts
         /// Remove an Todo item from the database.
         /// </summary>
         /// <param name="id">Todo to remove</param>
-        void DeleteTodo(int id);
+        void DeleteTodo(Todo todo);
     }
 }
